@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZELES · Inteligência aplicada</title>
+<meta name="description" content="Sistemas com inteligência artificial aplicados à operação de pequenas e médias empresas: atendimento medido, gestão diária no celular, risco de perda de cliente, previsão de caixa e presença digital. Jataí, Goiás.">
+<link rel="canonical" href="https://zeles.com.br/">
+<meta property="og:title" content="ZELES · Inteligência aplicada">
+<meta property="og:description" content="A inteligência que zela pelo seu negócio.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zeles.com.br/">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b1220'/><text x='50' y='69' font-size='58' font-family='Georgia,serif' font-weight='700' fill='%234ade80' text-anchor='middle'>Z</text></svg>">
+<style>
+  :root{
+    --fundo:#0b1220; --fundo2:#0f172a; --linha:#1e293b;
+    --texto:#e2e8f0; --suave:#94a3b8; --fraco:#64748b;
+    --acento:#4ade80; --acento2:#22d3ee;
+    --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--fundo); color:var(--texto);
+    font:400 17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+  a{color:var(--acento); text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ---------- topo ---------- */
+  header{
+    position:sticky; top:0; z-index:10; background:rgba(11,18,32,.86);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--linha);
+  }
+  .barra{display:flex; align-items:center; justify-content:space-between; height:66px}
+  .marca{display:flex; align-items:baseline; gap:10px; font-weight:700; letter-spacing:.14em; font-size:19px}
+  .marca .z{color:var(--acento); font-family:Georgia,serif; font-size:26px; line-height:1}
+  .marca small{font-weight:400; letter-spacing:.02em; color:var(--suave); font-size:13px}
+  .barra nav{display:flex; gap:26px; font-size:15px}
+  .barra nav a{color:var(--suave)}
+  .barra nav a:hover{color:var(--texto); text-decoration:none}
+  @media(max-width:720px){ .barra nav{display:none} .marca small{display:none} }
+
+  /* ---------- herói ---------- */
+  .heroi{padding:104px 0 84px; border-bottom:1px solid var(--linha)}
+  .heroi h1{
+    font-size:clamp(34px,6vw,60px); line-height:1.08; margin:0 0 24px;
+    font-weight:700; letter-spacing:-.02em;
+  }
+  .heroi h1 em{font-style:normal; color:var(--acento)}
+  .heroi .sub{font-size:clamp(18px,2.4vw,22px); color:var(--suave); max-width:62ch; margin:0 0 40px}
+  .selo{
+    display:inline-block; font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--acento2); border:1px solid #164e63; background:#082f3a;
+    padding:6px 14px; border-radius:999px; margin-bottom:28px;
+  }
+  .botoes{display:flex; gap:14px; flex-wrap:wrap}
+  .btn{
+    display:inline-block; padding:14px 26px; border-radius:10px; font-weight:600; font-size:16px;
+    border:1px solid transparent;
+  }
+  .btn-a{background:var(--acento); color:#052e16}
+  .btn-a:hover{background:#86efac; text-decoration:none}
+  .btn-b{border-color:var(--linha); color:var(--texto)}
+  .btn-b:hover{border-color:var(--suave); text-decoration:none}
+
+  /* ---------- a pergunta ---------- */
+  .pergunta{padding:80px 0; background:var(--fundo2); border-bottom:1px solid var(--linha)}
+  .pergunta blockquote{
+    margin:0; font-size:clamp(24px,3.6vw,38px); line-height:1.28; font-weight:600;
+    letter-spacing:-.015em; max-width:22ch;
+  }
+  .pergunta blockquote span{color:var(--acento)}
+  .pergunta p{color:var(--suave); max-width:60ch; margin:28px 0 0; font-size:18px}
+
+  /* ---------- seções ---------- */
+  section{padding:88px 0; border-bottom:1px solid var(--linha)}
+  h2{font-size:clamp(26px,3.4vw,36px); margin:0 0 14px; letter-spacing:-.02em}
+  .intro{color:var(--suave); max-width:64ch; margin:0 0 48px; font-size:18px}
+
+  .grade{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .card{
+    background:var(--fundo2); border:1px solid var(--linha); border-radius:14px; padding:26px 24px;
+  }
+  .card .rotulo{
+    font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--fraco);
+    margin-bottom:14px;
+  }
+  .card h3{margin:0 0 12px; font-size:19px; line-height:1.35}
+  .card h3 .q{color:var(--acento)}
+  .card p{margin:0; color:var(--suave); font-size:15.5px}
+
+  /* ---------- como funciona ---------- */
+  .passos{counter-reset:p; display:grid; gap:28px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .passo{position:relative; padding-left:56px}
+  .passo::before{
+    counter-increment:p; content:counter(p);
+    position:absolute; left:0; top:-4px; width:40px; height:40px; border-radius:10px;
+    background:#052e16; color:var(--acento); border:1px solid #14532d;
+    display:grid; place-items:center; font-weight:700; font-size:17px;
+  }
+  .passo h3{margin:6px 0 8px; font-size:18px}
+  .passo p{margin:0; color:var(--suave); font-size:15.5px}
+
+  /* ---------- para quem ---------- */
+  .lista{list-style:none; padding:0; margin:0; display:grid; gap:14px;
+         grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .lista li{padding-left:28px; position:relative; color:var(--suave)}
+  .lista li::before{content:"—"; position:absolute; left:0; color:var(--acento)}
+
+  /* ---------- contato ---------- */
+  .contato{background:var(--fundo2)}
+  .contato .caixa{
+    border:1px solid var(--linha); border-radius:16px; padding:40px;
+    display:flex; gap:32px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+  }
+  .contato h2{margin:0 0 8px}
+  .contato p{margin:0; color:var(--suave)}
+
+  footer{padding:44px 0; color:var(--fraco); font-size:14px}
+  footer .linha{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap}
+  footer a{color:var(--suave)}
+  .nota{font-size:13.5px; color:var(--fraco); margin-top:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap barra">
+    <div class="marca"><span class="z">Z</span>ZELES <small>· Inteligência aplicada</small></div>
+    <nav>
+      <a href="#faz">O que fazemos</a>
+      <a href="#como">Como funciona</a>
+      <a href="#quem">Para quem</a>
+      <a href="#contato">Falar com a gente</a>
+    </nav>
+  </div>
+</header>
+
+<div class="heroi">
+  <div class="wrap">
+    <span class="selo">Jataí · Goiás</span>
+    <h1>A inteligência que <em>zela</em> pelo seu negócio.</h1>
+    <p class="sub">
+      Sistemas com inteligência artificial aplicados à operação de quem toca uma empresa de verdade.
+      Não é assistente que conversa: é máquina que <strong>olha, mede e avisa</strong> — todo dia, sem
+      alguém precisar lembrar.
+    </p>
+    <div class="botoes">
+      <a class="btn btn-a" href="#contato">Falar com a gente</a>
+      <a class="btn btn-b" href="#faz">Ver o que fazemos</a>
+    </div>
+  </div>
+</div>
+
+<div class="pergunta">
+  <div class="wrap">
+    <blockquote>Quantos diretores seriam precisos <span>pra fazer o que a máquina faz?</span></blockquote>
+    <p>
+      A pergunta não é retórica. Todo negócio pequeno já tem os dados — no WhatsApp, no sistema, na
+      planilha, na catraca. O que ele não tem é alguém com tempo pra ler tudo isso <em>todo dia</em> e
+      dizer o que mudou. Esse é o trabalho que a gente automatiza.
+    </p>
+  </div>
+</div>
+
+<section id="faz">
+  <div class="wrap">
+    <h2>O que fazemos</h2>
+    <p class="intro">
+      Cada item abaixo responde uma pergunta que o dono já se faz — e hoje responde no chute, ou não
+      responde. Nada aqui é promessa de laboratório: é o que já roda, em operação real, todo dia.
+    </p>
+
+    <div class="grade">
+      <div class="card">
+        <div class="rotulo">Atendimento</div>
+        <h3><span class="q">“</span>Você sabe o que a sua equipe fala no WhatsApp da empresa?<span class="q">”</span></h3>
+        <p>Quanto tempo se leva pra responder, quanto fica sem resposta, quem respondeu o quê. O canal
+          onde a venda acontece é o único que ninguém mede.</p>
+      </div>
+
+      <div class="card">
+        <div class="rotulo">Gestão</div>
+        <h3><span class="q">“</span>O que mudou no meu negócio ontem?<span class="q">”</span></h3>
+        <p>Uma mensagem por manhã no seu celular, com o que exige decisão sua. Uma só — não seis. Bot
+          que fala demais é silenciado em duas semanas.</p>
+      </div>
+
+      <div class="card">
+        <div class="rotulo">Retenção</div>
+        <h3><span class="q">“</span>Quem vai embora esse mês e ninguém percebeu?<span class="q">”</span></h3>
+        <p>Cliente não avisa que vai sair: ele some devagar. O padrão de sumiço aparece no dado semanas
+          antes de virar cancelamento.</p>
+      </div>
+
+      <div class="card">
+        <div class="rotulo">Financeiro</div>
+        <h3><span class="q">“</span>Quanto entra no mês que vem?<span class="q">”</span></h3>
+        <p>Previsão de caixa e de receita a partir do seu próprio histórico — com o erro medido a cada
+          fechamento, para o número melhorar em vez de envelhecer.</p>
+      </div>
+
+      <div class="card">
+        <div class="rotulo">Presença digital</div>
+        <h3><span class="q">“</span>Quem procura o que eu vendo me acha?<span class="q">”</span></h3>
+        <p>Site que existe de verdade, campanha no Google operada por quem olha o resultado, e a rede
+          social alimentada sem você ter que pensar nela.</p>
+      </div>
+
+      <div class="card">
+        <div class="rotulo">Suporte</div>
+        <h3><span class="q">“</span>Isso aqui travou e eu não sei mexer.<span class="q">”</span></h3>
+        <p>Atendimento remoto na sua máquina, com você ligando e desligando o acesso por um botão.
+          Sem instalar programa de terceiro, sem deixar porta aberta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como">
+  <div class="wrap">
+    <h2>Como funciona</h2>
+    <p class="intro">
+      Sem projeto de seis meses e sem trocar o sistema que você já usa. A gente se conecta ao que
+      existe.
+    </p>
+    <div class="passos">
+      <div class="passo">
+        <h3>Medimos antes de propor</h3>
+        <p>Primeiro a gente lê o que o seu negócio já produz e devolve um retrato com números. Se não
+          houver o que melhorar, a gente diz — e isso não custa.</p>
+      </div>
+      <div class="passo">
+        <h3>Ligamos uma coisa de cada vez</h3>
+        <p>Começa pelo que dói mais e dá resultado mais rápido. Cada peça entra funcionando antes da
+          próxima começar.</p>
+      </div>
+      <div class="passo">
+        <h3>Você recebe, não vai buscar</h3>
+        <p>O relatório chega no seu celular. Se nada mudou, a máquina fica calada — alarme que toca
+          todo dia vira paisagem e para de ser lido.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quem">
+  <div class="wrap">
+    <h2>Para quem</h2>
+    <p class="intro">
+      Empresa que já funciona, tem cliente e tem dado — e não tem um time de tecnologia pra transformar
+      isso em decisão.
+    </p>
+    <ul class="lista">
+      <li>Quem atende cliente por WhatsApp e não consegue acompanhar tudo</li>
+      <li>Quem vive de recorrência e sente o cliente sumir sem entender por quê</li>
+      <li>Quem quer anunciar mas não sabe dizer se o anúncio deu retorno</li>
+      <li>Quem tem o dado espalhado em planilha, sistema e cabeça</li>
+      <li>Quem já tentou agência e recebeu relatório bonito sem decisão dentro</li>
+      <li>Quem é o gargalo do próprio negócio porque tudo passa por ele</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contato" class="contato">
+  <div class="wrap">
+    <div class="caixa">
+      <div>
+        <h2>Vamos conversar</h2>
+        <p>Conte o que trava hoje. A primeira leitura do seu negócio é por nossa conta.</p>
+      </div>
+      <a class="btn btn-a" href="mailto:lb.cabral.leles@gmail.com?subject=ZELES%20%E2%80%94%20quero%20conversar">Mandar uma mensagem</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap linha">
+    <div>
+      <strong>ZELES</strong> · Inteligência aplicada — Jataí, Goiás
+      <div class="nota">
+        <em>zelo</em>, do grego <em>ζῆλος</em>: cuidar, vigiar, tomar conta.
+      </div>
+    </div>
+    <div><a href="mailto:lb.cabral.leles@gmail.com">lb.cabral.leles@gmail.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
