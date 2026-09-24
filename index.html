@@ -4,119 +4,221 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZELES · Inteligência aplicada</title>
-<meta name="description" content="Sistemas com inteligência artificial aplicados à operação de pequenas e médias empresas: atendimento medido, gestão diária no celular, risco de perda de cliente, previsão de caixa e presença digital. Jataí, Goiás. O aplicativo ZELES gerencia, com autorização do cliente, a conta de Google Ads da empresa dele.">
+<meta name="description" content="Sistemas com inteligência artificial aplicados à operação de pequenas e médias empresas: atendimento medido, gestão diária no celular, risco de perda de cliente, previsão de caixa e presença digital. Jataí, Goiás.">
 <link rel="canonical" href="https://zeles.com.br/">
 <meta property="og:title" content="ZELES · Inteligência aplicada">
 <meta property="og:description" content="A inteligência que zela pelo seu negócio.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://zeles.com.br/">
 <meta property="og:locale" content="pt_BR">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b1220'/><text x='50' y='69' font-size='58' font-family='Georgia,serif' font-weight='700' fill='%234ade80' text-anchor='middle'>Z</text></svg>">
+<meta name="theme-color" content="#F7F2EB">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIyIiBmaWxsPSIjMjYyMTFEIi8+PHBvbHlnb24gcG9pbnRzPSIxOS4xNCwxNC4wMCA2Ni4xNiwxNC4wMCA4MC44NiwyNy43MSAzNi43OCw3Mi4yOSA1Ny4zNSw3Mi4yOSA1Ny4zNSw4Ni4wMCAzMy44NCw4Ni4wMCAxOS4xNCw3Mi4yOSA2My4yMiwyNy43MSAxOS4xNCwyNy43MSIgZmlsbD0iI0Y3RjJFQiIvPjwvc3ZnPg==">
+<!--
+  ZELES · site v3 "RETICULA-21" — 20/09/2026.
+  Conceito (DeepSeek): o site e' um instrumento otico de precisao sobre PAPEL. A grade de 21 e' a
+  escala; o Z e' o reticulo; o scroll e' o avanco da vigilia (zelo=vigiar); o mouse mede.
+  Endurecido por 2 juizes (DeepSeek + GLM): cortados contador e barra-de-progresso (redundante com o
+  Z); reveal so sob .js (senao some sem JS); reduced-motion zera tudo; grade some no mobile; cursor
+  reticulo 1:1 sem lerp; sem libs. Pesquisa: VIA VIGORI\12_PESQUISAS\ZELES\2026-09-20_DEEP_site...
+-->
 <style>
   :root{
-    --fundo:#0b1220; --fundo2:#0f172a; --linha:#1e293b;
-    --texto:#e2e8f0; --suave:#94a3b8; --fraco:#64748b;
-    --acento:#4ade80; --acento2:#22d3ee;
-    --max:1080px;
+    /* Paleta ZELES (tese 2, brasa) — cada cor derivada de pigmento medido no acervo do Met. */
+    --fundo:#F7F2EB; --fundo2:#EFE7D9; --linha:#E2D8C8;
+    --texto:#26211D; --suave:#5F5346; --fraco:#6E6051;
+    --acento:#9D5504; --acento2:#B4630A;
+    --grade: rgba(38,33,29,.055);   /* linha da grade: alpha vive AQUI, sem overlay em cascata */
+    --max:1080px; --col: calc(100% / 21);
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
     margin:0; background:var(--fundo); color:var(--texto);
     font:400 17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
+    -webkit-font-smoothing:antialiased; position:relative; overflow-x:hidden;
   }
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px; position:relative; z-index:2}
   a{color:var(--acento); text-decoration:none}
   a:hover{text-decoration:underline}
 
-  /* ---------- topo ---------- */
-  header{
-    position:sticky; top:0; z-index:10; background:rgba(11,18,32,.86);
-    backdrop-filter:blur(10px); border-bottom:1px solid var(--linha);
+  /* ---------- o PAPEL-INSTRUMENTO: grade de 21 + grao (fundo fixo, atras de tudo) ---------- */
+  .papel{position:fixed; inset:0; z-index:0; pointer-events:none}
+  .papel .grade{
+    position:absolute; inset:0;
+    background-image:repeating-linear-gradient(to right,
+      var(--grade) 0, var(--grade) 1px, transparent 1px, transparent var(--col));
   }
+  /* grao CORTADO (2 juizes, 20/09): feTurbulence e o filtro SVG mais caro, trava celular fraco.
+     A grade + a linha do Z ja dao a textura de instrumento. */
+  /* no celular a grade de 21 vira serrilhado (~18px): so 3 colunas */
+  @media(max-width:720px){
+    :root{ --col: calc(100% / 3) }
+  }
+
+  /* ---------- cursor reticulo de medicao (so mouse fino; 1:1 SEM lerp) ---------- */
+  .reticulo{position:fixed; top:0; left:0; width:34px; height:34px; z-index:60;
+    pointer-events:none; transform:translate3d(-100px,-100px,0); mix-blend-mode:normal;
+    opacity:0; transition:opacity .3s}
+  .reticulo::before,.reticulo::after{content:""; position:absolute; background:var(--texto)}
+  .reticulo::before{left:50%; top:0; width:1px; height:100%; transform:translateX(-.5px)}
+  .reticulo::after{top:50%; left:0; height:1px; width:100%; transform:translateY(-.5px)}
+  .reticulo i{position:absolute; inset:0; border:1px solid var(--texto); border-radius:50%;
+    transition:border-color .18s, border-radius .18s, transform .18s}
+  .reticulo.alvo i{border-color:var(--acento); border-radius:3px; transform:scale(.62)}
+  @media (hover:hover) and (pointer:fine){
+    body.tem-reticulo{cursor:none}
+    /* GLM: nunca esconder o cursor sobre texto/campos */
+    body.tem-reticulo a, body.tem-reticulo button, body.tem-reticulo input,
+    body.tem-reticulo textarea, body.tem-reticulo p, body.tem-reticulo h1,
+    body.tem-reticulo h2, body.tem-reticulo h3, body.tem-reticulo li,
+    body.tem-reticulo blockquote{cursor:auto}
+    body.tem-reticulo .reticulo{opacity:1}
+  }
+
+  /* ---------- topo ---------- */
+  header{position:sticky; top:0; z-index:10; background:rgba(247,242,235,.86);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--linha)}
   .barra{display:flex; align-items:center; justify-content:space-between; height:66px}
-  .marca{display:flex; align-items:baseline; gap:10px; font-weight:700; letter-spacing:.14em; font-size:19px}
-  .marca .z{color:var(--acento); font-family:Georgia,serif; font-size:26px; line-height:1}
+  .marca{display:flex; align-items:center; gap:12px}
+  .marca .wm{height:19px; width:auto; display:block}
+  .marca .wm polygon{fill:var(--texto)}
   .marca small{font-weight:400; letter-spacing:.02em; color:var(--suave); font-size:13px}
   .barra nav{display:flex; gap:26px; font-size:15px}
   .barra nav a{color:var(--suave)}
   .barra nav a:hover{color:var(--texto); text-decoration:none}
   @media(max-width:720px){ .barra nav{display:none} .marca small{display:none} }
 
-  /* ---------- herói ---------- */
-  .heroi{padding:104px 0 84px; border-bottom:1px solid var(--linha)}
-  .heroi h1{
-    font-size:clamp(34px,6vw,60px); line-height:1.08; margin:0 0 24px;
-    font-weight:700; letter-spacing:-.02em;
-  }
+  /* ---------- foco de teclado (juizes: faltava) ---------- */
+  a:focus-visible, button:focus-visible{outline:2px solid var(--acento); outline-offset:3px;
+    border-radius:2px}
+
+  /* ---------- heroi: o Z-instrumento que se calibra no scroll ---------- */
+  .heroi{padding:96px 0 84px; border-bottom:1px solid var(--linha); position:relative}
+  .heroi-grade{display:grid; grid-template-columns:1.35fr .65fr; gap:40px; align-items:center}
+  @media(max-width:860px){ .heroi-grade{grid-template-columns:1fr} .zbox{order:-1; max-width:220px} }
+  .heroi h1{font-size:clamp(34px,6vw,60px); line-height:1.08; margin:0 0 24px; font-weight:700;
+    letter-spacing:-.02em}
   .heroi h1 em{font-style:normal; color:var(--acento)}
   .heroi .sub{font-size:clamp(18px,2.4vw,22px); color:var(--suave); max-width:62ch; margin:0 0 40px}
-  .selo{
-    display:inline-block; font-size:13px; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--acento2); border:1px solid #164e63; background:#082f3a;
-    padding:6px 14px; border-radius:999px; margin-bottom:28px;
-  }
+  .selo{display:inline-flex; align-items:center; gap:8px; font-size:13px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--acento); border:1px solid #E2C9A0; background:#F5E9D5;
+    padding:6px 14px; border-radius:999px; margin-bottom:28px}
+  .selo::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--acento);
+    box-shadow:0 0 0 3px rgba(157,85,4,.18)}
   .botoes{display:flex; gap:14px; flex-wrap:wrap}
-  .btn{
-    display:inline-block; padding:14px 26px; border-radius:10px; font-weight:600; font-size:16px;
-    border:1px solid transparent;
-  }
-  .btn-a{background:var(--acento); color:#052e16}
-  .btn-a:hover{background:#86efac; text-decoration:none}
+  .btn{display:inline-block; padding:14px 26px; border-radius:10px; font-weight:600; font-size:16px;
+    border:1px solid transparent}
+  .btn-a{background:var(--acento); color:#F7F2EB}
+  .btn-a:hover{background:var(--acento2); text-decoration:none}
   .btn-b{border-color:var(--linha); color:var(--texto)}
   .btn-b:hover{border-color:var(--suave); text-decoration:none}
 
+  .zbox{position:relative; aspect-ratio:1; width:100%; max-width:300px; margin:0 auto}
+  .zbox svg{width:100%; height:100%; display:block; overflow:visible}
+  .z-traco{fill:none; stroke:var(--texto); stroke-width:2;
+    stroke-dasharray:1; stroke-dashoffset:1}
+  .z-fill{fill:var(--texto); opacity:0}
+  .z-reticula > line{stroke:var(--acento); stroke-width:1; opacity:.45}
+  .z-ticks line{stroke:var(--acento); stroke-width:1.2; opacity:.7}
+  /* desenho amarrado ao scroll onde ha suporte; senao, o IO (classe .visto) resolve */
+  @supports (animation-timeline: view()){
+    .z-traco{ animation:desenha linear both; animation-timeline:view(); animation-range:entry 10% cover 40% }
+    .z-fill{ animation:preenche linear both; animation-timeline:view(); animation-range:cover 35% cover 55% }
+  }
+  @keyframes desenha{ to{ stroke-dashoffset:0 } }
+  @keyframes preenche{ to{ opacity:1 } }
+  .no-vt .zbox.visto .z-traco{ stroke-dashoffset:0; transition:stroke-dashoffset 1.4s ease }
+  .no-vt .zbox.visto .z-fill{ opacity:1; transition:opacity .8s ease .9s }
+
+  /* ---------- revelacao por linha (SO sob .js; sem JS o texto aparece normal) ---------- */
+  .js .reveal .ln{display:block; overflow:hidden}
+  .js .reveal .ln > span{display:block; transform:translateY(110%);
+    transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js .reveal.visto .ln > span{transform:translateY(0)}
+  .js .reveal .ln:nth-child(2) > span{transition-delay:.06s}
+  .js .reveal .ln:nth-child(3) > span{transition-delay:.12s}
+  .js .fade{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease}
+  .js .fade.visto{opacity:1; transform:none}
+
   /* ---------- a pergunta ---------- */
   .pergunta{padding:80px 0; background:var(--fundo2); border-bottom:1px solid var(--linha)}
-  .pergunta blockquote{
-    margin:0; font-size:clamp(24px,3.6vw,38px); line-height:1.28; font-weight:600;
-    letter-spacing:-.015em; max-width:22ch;
-  }
-  .pergunta blockquote span{color:var(--acento)}
+  .pergunta blockquote{margin:0; font-size:clamp(24px,3.6vw,38px); line-height:1.28; font-weight:600;
+    letter-spacing:-.015em; max-width:22ch}
+  .pergunta blockquote .brasa{color:var(--acento)}
   .pergunta p{color:var(--suave); max-width:60ch; margin:28px 0 0; font-size:18px}
 
-  /* ---------- seções ---------- */
+  /* ---------- secoes ---------- */
   section{padding:88px 0; border-bottom:1px solid var(--linha)}
   h2{font-size:clamp(26px,3.4vw,36px); margin:0 0 14px; letter-spacing:-.02em}
   .intro{color:var(--suave); max-width:64ch; margin:0 0 48px; font-size:18px}
 
-  .grade{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-  .card{
-    background:var(--fundo2); border:1px solid var(--linha); border-radius:14px; padding:26px 24px;
-  }
-  .card .rotulo{
-    font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--fraco);
-    margin-bottom:14px;
-  }
+  /* ---------- cards: alinhados a grade, tick brasa no hover E no foco (sem elevate de template) --- */
+  .grade-cards{display:grid; gap:0; grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    border:1px solid var(--linha); border-radius:14px; overflow:hidden; background:var(--fundo)}
+  .card{padding:28px 26px; border-right:1px solid var(--linha); border-bottom:1px solid var(--linha);
+    position:relative; background:var(--fundo); transition:background .25s}
+  .card::after{content:""; position:absolute; top:0; left:0; width:0; height:3px;
+    background:var(--acento); transition:width .3s ease}
+  .card:hover, .card:focus-within{background:var(--fundo2)}
+  .card:hover::after, .card:focus-within::after{width:38px}
+  .card .rotulo{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--fraco);
+    margin-bottom:14px; font-variant-numeric:tabular-nums}
+  .card .rotulo b{color:var(--acento); font-weight:700; margin-right:8px}
   .card h3{margin:0 0 12px; font-size:19px; line-height:1.35}
   .card h3 .q{color:var(--acento)}
   .card p{margin:0; color:var(--suave); font-size:15.5px}
 
+  /* ---------- prova das 07:00 (componente real, dados de exemplo — 0 KB de imagem) ---------- */
+  .prova{background:var(--fundo2); border-bottom:1px solid var(--linha)}
+  .prova-grade{display:grid; grid-template-columns:1fr .9fr; gap:44px; align-items:center}
+  @media(max-width:820px){ .prova-grade{grid-template-columns:1fr; gap:28px} }
+  .prova h2{margin:0 0 14px}
+  .prova .intro{margin:0 0 8px}
+  .card-briefing{background:var(--fundo); border:1px solid var(--linha); border-radius:16px;
+    padding:22px; box-shadow:0 24px 60px -34px rgba(38,33,29,.4); max-width:400px; margin:0 auto}
+  .cb-topo{display:flex; align-items:center; gap:10px; padding-bottom:14px;
+    border-bottom:1px solid var(--linha); margin-bottom:16px}
+  .cb-topo .pt{width:9px; height:9px; border-radius:50%; background:var(--acento);
+    box-shadow:0 0 0 4px rgba(157,85,4,.16)}
+  .cb-topo b{font-size:14px; letter-spacing:.02em}
+  .cb-topo .hora{margin-left:auto; font:13px ui-monospace,Consolas,monospace; color:var(--fraco);
+    font-variant-numeric:tabular-nums}
+  .cb-linha{display:flex; gap:11px; align-items:flex-start; padding:9px 0; font-size:14px;
+    line-height:1.45}
+  .cb-linha .mk{flex:0 0 auto; width:7px; height:7px; border-radius:2px; margin-top:6px}
+  .cb-linha .mk.ok{background:#1E7A46} .cb-linha .mk.al{background:var(--acento)}
+  .cb-linha .mk.er{background:#A32B1E}
+  .cb-linha b{font-weight:600}
+  .cb-graf{margin:16px 0 6px; padding-top:14px; border-top:1px solid var(--linha)}
+  .cb-graf .rot{font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--fraco);
+    margin-bottom:8px}
+  .cb-graf svg{width:100%; height:52px; display:block}
+  .cb-graf .barra{fill:var(--acento); opacity:.28}
+  .cb-graf .barra.hoje{opacity:.95}
+  .cb-rodape{margin-top:14px; padding-top:12px; border-top:1px solid var(--linha);
+    font-size:11.5px; color:var(--fraco); display:flex; justify-content:space-between; gap:10px}
+  .cb-rodape .tag{border:1px solid var(--linha); border-radius:999px; padding:2px 9px}
+
   /* ---------- como funciona ---------- */
   .passos{counter-reset:p; display:grid; gap:28px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
   .passo{position:relative; padding-left:56px}
-  .passo::before{
-    counter-increment:p; content:counter(p);
+  .passo::before{counter-increment:p; content:counter(p,decimal-leading-zero);
     position:absolute; left:0; top:-4px; width:40px; height:40px; border-radius:10px;
-    background:#052e16; color:var(--acento); border:1px solid #14532d;
-    display:grid; place-items:center; font-weight:700; font-size:17px;
-  }
+    background:#F5E9D5; color:var(--acento); border:1px solid #E2C9A0;
+    display:grid; place-items:center; font-weight:700; font-size:15px; font-variant-numeric:tabular-nums}
   .passo h3{margin:6px 0 8px; font-size:18px}
   .passo p{margin:0; color:var(--suave); font-size:15.5px}
 
   /* ---------- para quem ---------- */
   .lista{list-style:none; padding:0; margin:0; display:grid; gap:14px;
-         grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
   .lista li{padding-left:28px; position:relative; color:var(--suave)}
   .lista li::before{content:"—"; position:absolute; left:0; color:var(--acento)}
 
   /* ---------- contato ---------- */
   .contato{background:var(--fundo2)}
-  .contato .caixa{
-    border:1px solid var(--linha); border-radius:16px; padding:40px;
-    display:flex; gap:32px; align-items:center; justify-content:space-between; flex-wrap:wrap;
-  }
+  .contato .caixa{border:1px solid var(--linha); border-radius:16px; padding:40px; background:var(--fundo);
+    display:flex; gap:32px; align-items:center; justify-content:space-between; flex-wrap:wrap}
   .contato h2{margin:0 0 8px}
   .contato p{margin:0; color:var(--suave)}
 
@@ -124,43 +226,77 @@
   footer .linha{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap}
   footer a{color:var(--suave)}
   .nota{font-size:13.5px; color:var(--fraco); margin-top:10px}
+
+  /* ---------- reduced-motion: zera TUDO ao estado final (juizes) ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none !important; transition:none !important}
+    .z-traco{stroke-dashoffset:0} .z-fill{opacity:1}
+    .js .reveal .ln > span{transform:none} .js .fade{opacity:1; transform:none}
+    .reticulo{display:none} body.tem-reticulo{cursor:auto}
+  }
 </style>
 </head>
 <body>
+<script>
+  /* trava .js: so agora o CSS de revelacao passa a valer. Sem JS, o texto fica visivel (SEO/leitor). */
+  document.documentElement.classList.add('js');
+  if(!CSS.supports('animation-timeline','view()')) document.documentElement.classList.add('no-vt');
+</script>
+
+<div class="papel" aria-hidden="true"><div class="grade"></div></div>
+<div class="reticulo" aria-hidden="true"><i></i></div>
 
 <header>
   <div class="wrap barra">
-    <div class="marca"><span class="z">Z</span>ZELES <small>· Inteligência aplicada</small></div>
+    <div class="marca"><svg class="wm" viewBox="0 0 430 100" role="img" aria-label="ZELES"><polygon points="0.00,0.00 65.31,0.00 85.71,19.05 24.49,80.95 53.06,80.95 53.06,100.00 20.41,100.00 0.00,80.95 61.22,19.05 0.00,19.05"/><polygon points="105.71,0.00 124.76,0.00 124.76,100.00 105.71,100.00"/><polygon points="124.76,0.00 172.38,0.00 172.38,19.05 124.76,19.05"/><polygon points="124.76,40.48 153.71,40.48 153.71,59.52 124.76,59.52"/><polygon points="124.76,80.95 146.98,80.95 146.98,100.00 124.76,100.00"/><polygon points="192.38,0.00 211.43,0.00 211.43,80.95 192.38,80.95"/><polygon points="192.38,80.95 229.23,80.95 229.23,100.00 192.38,100.00"/><polygon points="271.90,0.00 290.95,0.00 290.95,100.00 271.90,100.00"/><polygon points="290.95,0.00 338.57,0.00 338.57,19.05 290.95,19.05"/><polygon points="290.95,40.48 319.90,40.48 319.90,59.52 290.95,59.52"/><polygon points="290.95,80.95 313.17,80.95 313.17,100.00 290.95,100.00"/><polygon points="358.57,0.00 430.00,0.00 430.00,19.05 358.57,19.05"/><polygon points="358.57,19.05 377.62,19.05 377.62,38.10 358.57,38.10"/><polygon points="358.57,33.33 430.00,52.38 430.00,71.43 358.57,52.38"/><polygon points="410.95,66.67 430.00,66.67 430.00,80.95 410.95,80.95"/><polygon points="385.78,80.95 430.00,80.95 430.00,100.00 385.78,100.00"/></svg><small>· Inteligência aplicada</small></div>
     <nav>
       <a href="#faz">O que fazemos</a>
       <a href="#como">Como funciona</a>
       <a href="#quem">Para quem</a>
-      <a href="#app">O aplicativo</a>
       <a href="#contato">Falar com a gente</a>
     </nav>
   </div>
 </header>
 
 <div class="heroi">
-  <div class="wrap">
-    <span class="selo">Jataí · Goiás</span>
-    <h1>A inteligência que <em>zela</em> pelo seu negócio.</h1>
-    <p class="sub">
-      Sistemas com inteligência artificial aplicados à operação de quem toca uma empresa de verdade.
-      Não é assistente que conversa: é máquina que <strong>olha, mede e avisa</strong> — todo dia, sem
-      alguém precisar lembrar.
-    </p>
-    <div class="botoes">
-      <a class="btn btn-a" href="#contato">Falar com a gente</a>
-      <a class="btn btn-b" href="#faz">Ver o que fazemos</a>
+  <div class="wrap heroi-grade">
+    <div>
+      <span class="selo">Jataí · Goiás</span>
+      <h1 class="reveal"><span class="ln"><span>A inteligência que <em>zela</em></span></span><span class="ln"><span>pelo seu negócio.</span></span></h1>
+      <p class="sub fade">
+        Sistemas com inteligência artificial aplicados à operação de quem toca uma empresa de verdade.
+        Não é assistente que conversa: é máquina que <strong>olha, mede e avisa</strong> — todo dia, sem
+        alguém precisar lembrar.
+      </p>
+      <div class="botoes fade">
+        <a class="btn btn-a" href="#contato">Falar com a gente</a>
+        <a class="btn btn-b" href="#faz">Ver o que fazemos</a>
+      </div>
+    </div>
+    <div class="zbox" aria-hidden="true">
+      <svg viewBox="0 0 100 100">
+        <g class="z-reticula">
+          <line x1="50" y1="-6" x2="50" y2="106"/><line x1="-6" y1="50" x2="106" y2="50"/>
+          <!-- ticks de medicao: o instrumento que mede/vigia (0 KB, sem risco esoterico) -->
+          <g class="z-ticks">
+            <line x1="20" y1="47" x2="20" y2="53"/><line x1="35" y1="48" x2="35" y2="52"/>
+            <line x1="65" y1="48" x2="65" y2="52"/><line x1="80" y1="47" x2="80" y2="53"/>
+            <line x1="47" y1="20" x2="53" y2="20"/><line x1="48" y1="35" x2="52" y2="35"/>
+            <line x1="48" y1="65" x2="52" y2="65"/><line x1="47" y1="80" x2="53" y2="80"/>
+          </g>
+        </g>
+        <path class="z-traco" pathLength="1" d="M19.14 14 L66.16 14 L80.86 27.71 L36.78 72.29 L57.35 72.29 L57.35 86 L33.84 86 L19.14 72.29 L63.22 27.71 L19.14 27.71 Z"/>
+        <path class="z-fill" d="M19.14 14 L66.16 14 L80.86 27.71 L36.78 72.29 L57.35 72.29 L57.35 86 L33.84 86 L19.14 72.29 L63.22 27.71 L19.14 27.71 Z"/>
+      </svg>
     </div>
   </div>
 </div>
 
 <div class="pergunta">
   <div class="wrap">
-    <blockquote>Quantos diretores seriam precisos <span>pra fazer o que a máquina faz?</span></blockquote>
-    <p>
+    <blockquote class="reveal"><span class="ln"><span>Quantos diretores seriam precisos</span></span><span class="ln"><span><span class="brasa">pra fazer o que a máquina faz?</span></span></span></blockquote>
+    <p class="fade">
       A pergunta não é retórica. Todo negócio pequeno já tem os dados — no WhatsApp, no sistema, na
       planilha, na catraca. O que ele não tem é alguém com tempo pra ler tudo isso <em>todo dia</em> e
       dizer o que mudou. Esse é o trabalho que a gente automatiza.
@@ -168,52 +304,79 @@
   </div>
 </div>
 
+<section class="prova">
+  <div class="wrap prova-grade">
+    <div>
+      <h2 class="fade">É assim que chega</h2>
+      <p class="intro fade">
+        Toda manhã, às 07:00, uma mensagem no seu celular com o que mudou e o que pede decisão sua —
+        não seis, uma. Se nada mudou, a máquina fica calada. Do lado, o que uma manhã de verdade traz.
+      </p>
+    </div>
+    <div class="card-briefing fade" role="img"
+         aria-label="Exemplo de briefing diário: uma confirmação, um alerta de queda e um risco de cliente, com um gráfico de acessos da semana.">
+      <div class="cb-topo"><span class="pt"></span><b>Seu briefing</b><span class="hora">07:00</span></div>
+      <div class="cb-linha"><span class="mk ok"></span><span>Caixa de ontem <b>+8%</b> sobre a média das quartas.</span></div>
+      <div class="cb-linha"><span class="mk al"></span><span>Tempo de resposta no WhatsApp subiu pra <b>1h12</b> — 14 clientes esperando.</span></div>
+      <div class="cb-linha"><span class="mk er"></span><span><b>3 clientes</b> sumiram do padrão há 9 dias. Lista pronta pra chamar.</span></div>
+      <div class="cb-graf">
+        <div class="rot">Acessos · últimos 7 dias</div>
+        <svg viewBox="0 0 210 52" preserveAspectRatio="none" aria-hidden="true">
+          <rect class="barra" x="2"   y="26" width="24" height="26"/>
+          <rect class="barra" x="30"  y="18" width="24" height="34"/>
+          <rect class="barra" x="58"  y="30" width="24" height="22"/>
+          <rect class="barra" x="86"  y="14" width="24" height="38"/>
+          <rect class="barra" x="114" y="22" width="24" height="30"/>
+          <rect class="barra" x="142" y="10" width="24" height="42"/>
+          <rect class="barra hoje" x="170" y="4" width="24" height="48"/>
+        </svg>
+      </div>
+      <div class="cb-rodape"><span>ZELES · Inteligência aplicada</span><span class="tag">exemplo · dados de demonstração</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="faz">
   <div class="wrap">
-    <h2>O que fazemos</h2>
-    <p class="intro">
+    <h2 class="fade">O que fazemos</h2>
+    <p class="intro fade">
       Cada item abaixo responde uma pergunta que o dono já se faz — e hoje responde no chute, ou não
       responde. Nada aqui é promessa de laboratório: é o que já roda, em operação real, todo dia.
     </p>
 
-    <div class="grade">
-      <div class="card">
-        <div class="rotulo">Atendimento</div>
+    <div class="grade-cards">
+      <div class="card" tabindex="0">
+        <div class="rotulo"><b>01</b>Atendimento</div>
         <h3><span class="q">“</span>Você sabe o que a sua equipe fala no WhatsApp da empresa?<span class="q">”</span></h3>
         <p>Quanto tempo se leva pra responder, quanto fica sem resposta, quem respondeu o quê. O canal
           onde a venda acontece é o único que ninguém mede.</p>
       </div>
-
-      <div class="card">
-        <div class="rotulo">Gestão</div>
+      <div class="card" tabindex="0">
+        <div class="rotulo"><b>02</b>Gestão</div>
         <h3><span class="q">“</span>O que mudou no meu negócio ontem?<span class="q">”</span></h3>
         <p>Uma mensagem por manhã no seu celular, com o que exige decisão sua. Uma só — não seis. Bot
           que fala demais é silenciado em duas semanas.</p>
       </div>
-
-      <div class="card">
-        <div class="rotulo">Retenção</div>
+      <div class="card" tabindex="0">
+        <div class="rotulo"><b>03</b>Retenção</div>
         <h3><span class="q">“</span>Quem vai embora esse mês e ninguém percebeu?<span class="q">”</span></h3>
         <p>Cliente não avisa que vai sair: ele some devagar. O padrão de sumiço aparece no dado semanas
           antes de virar cancelamento.</p>
       </div>
-
-      <div class="card">
-        <div class="rotulo">Financeiro</div>
+      <div class="card" tabindex="0">
+        <div class="rotulo"><b>04</b>Financeiro</div>
         <h3><span class="q">“</span>Quanto entra no mês que vem?<span class="q">”</span></h3>
         <p>Previsão de caixa e de receita a partir do seu próprio histórico — com o erro medido a cada
           fechamento, para o número melhorar em vez de envelhecer.</p>
       </div>
-
-      <div class="card">
-        <div class="rotulo">Presença digital</div>
+      <div class="card" tabindex="0">
+        <div class="rotulo"><b>05</b>Presença digital</div>
         <h3><span class="q">“</span>Quem procura o que eu vendo me acha?<span class="q">”</span></h3>
         <p>Site que existe de verdade, campanha no Google operada por quem olha o resultado, e a rede
           social alimentada sem você ter que pensar nela.</p>
       </div>
-
-      <div class="card">
-        <div class="rotulo">Suporte</div>
+      <div class="card" tabindex="0">
+        <div class="rotulo"><b>06</b>Suporte</div>
         <h3><span class="q">“</span>Isso aqui travou e eu não sei mexer.<span class="q">”</span></h3>
         <p>Atendimento remoto na sua máquina, com você ligando e desligando o acesso por um botão.
           Sem instalar programa de terceiro, sem deixar porta aberta.</p>
@@ -224,23 +387,23 @@
 
 <section id="como">
   <div class="wrap">
-    <h2>Como funciona</h2>
-    <p class="intro">
+    <h2 class="fade">Como funciona</h2>
+    <p class="intro fade">
       Sem projeto de seis meses e sem trocar o sistema que você já usa. A gente se conecta ao que
       existe.
     </p>
     <div class="passos">
-      <div class="passo">
+      <div class="passo fade">
         <h3>Medimos antes de propor</h3>
         <p>Primeiro a gente lê o que o seu negócio já produz e devolve um retrato com números. Se não
           houver o que melhorar, a gente diz — e isso não custa.</p>
       </div>
-      <div class="passo">
+      <div class="passo fade">
         <h3>Ligamos uma coisa de cada vez</h3>
         <p>Começa pelo que dói mais e dá resultado mais rápido. Cada peça entra funcionando antes da
           próxima começar.</p>
       </div>
-      <div class="passo">
+      <div class="passo fade">
         <h3>Você recebe, não vai buscar</h3>
         <p>O relatório chega no seu celular. Se nada mudou, a máquina fica calada — alarme que toca
           todo dia vira paisagem e para de ser lido.</p>
@@ -251,53 +414,25 @@
 
 <section id="quem">
   <div class="wrap">
-    <h2>Para quem</h2>
-    <p class="intro">
+    <h2 class="fade">Para quem</h2>
+    <p class="intro fade">
       Empresa que já funciona, tem cliente e tem dado — e não tem um time de tecnologia pra transformar
       isso em decisão.
     </p>
     <ul class="lista">
-      <li>Quem atende cliente por WhatsApp e não consegue acompanhar tudo</li>
-      <li>Quem vive de recorrência e sente o cliente sumir sem entender por quê</li>
-      <li>Quem quer anunciar mas não sabe dizer se o anúncio deu retorno</li>
-      <li>Quem tem o dado espalhado em planilha, sistema e cabeça</li>
-      <li>Quem já tentou agência e recebeu relatório bonito sem decisão dentro</li>
-      <li>Quem é o gargalo do próprio negócio porque tudo passa por ele</li>
+      <li class="fade">Quem atende cliente por WhatsApp e não consegue acompanhar tudo</li>
+      <li class="fade">Quem vive de recorrência e sente o cliente sumir sem entender por quê</li>
+      <li class="fade">Quem quer anunciar mas não sabe dizer se o anúncio deu retorno</li>
+      <li class="fade">Quem tem o dado espalhado em planilha, sistema e cabeça</li>
+      <li class="fade">Quem já tentou agência e recebeu relatório bonito sem decisão dentro</li>
+      <li class="fade">Quem é o gargalo do próprio negócio porque tudo passa por ele</li>
     </ul>
-  </div>
-</section>
-
-<section id="app">
-  <div class="wrap">
-    <h2>ZELES — o aplicativo</h2>
-    <p class="intro">
-      <strong>ZELES</strong> é o nome do aplicativo que usamos para cuidar da conta de anúncios dos
-      nossos clientes. Ele existe para uma finalidade só: <strong>ler, medir e gerenciar campanhas
-      do Google Ads da própria empresa cliente</strong>, com autorização dela.
-    </p>
-    <ul class="lista">
-      <li><strong>O que ele faz:</strong> lê as campanhas, os grupos de anúncios e as palavras-chave
-        da conta de Google Ads do cliente; mede o que cada campanha gastou e trouxe; e cria ou ajusta
-        campanha, orçamento e anúncio quando o cliente pede.</li>
-      <li><strong>A que dados ele acessa:</strong> apenas os dados da conta de anúncios que o próprio
-        dono autorizou, pela tela de permissão do Google. Nada de contato, agenda ou arquivo pessoal.</li>
-      <li><strong>Quem é o dono da conta:</strong> o cliente. A ZELES opera a conta dele — a conta
-        nunca muda de dono, e a autorização pode ser retirada a qualquer momento pelo próprio cliente,
-        na conta Google dele.</li>
-      <li><strong>O que não fazemos:</strong> não vendemos, não alugamos e não repassamos esses dados
-        a ninguém, e não usamos os dados de um cliente no trabalho de outro.</li>
-    </ul>
-    <p class="intro">
-      Regras completas em <a href="/termos.html">Termos de uso</a> e
-      <a href="/privacidade.html">Política de Privacidade</a>. Para apagar os dados:
-      <a href="/exclusao-de-dados.html">Exclusão de dados</a>.
-    </p>
   </div>
 </section>
 
 <section id="contato" class="contato">
   <div class="wrap">
-    <div class="caixa">
+    <div class="caixa fade">
       <div>
         <h2>Vamos conversar</h2>
         <p>Conte o que trava hoje. A primeira leitura do seu negócio é por nossa conta.</p>
@@ -323,6 +458,42 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* revelacao ao entrar na viewport (reveal por linha + fade), e o Z no fallback sem view() */
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visto'); io.unobserve(e.target); }
+      });
+    }, {threshold:.2, rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal,.fade,.zbox').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal,.fade,.zbox').forEach(function(el){ el.classList.add('visto'); });
+  }
+
+  /* cursor reticulo — so mouse fino, 1:1 SEM lerp (instrumento de precisao nao tem atraso) */
+  var fino = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(fino && !reduz){
+    var ret = document.querySelector('.reticulo');
+    document.body.classList.add('tem-reticulo');
+    var rx=-100, ry=-100, meio=17, ticking=false;
+    window.addEventListener('mousemove', function(ev){
+      rx=ev.clientX; ry=ev.clientY;
+      if(!ticking){ ticking=true; requestAnimationFrame(function(){
+        ret.style.transform='translate3d('+(rx-meio)+'px,'+(ry-meio)+'px,0)'; ticking=false;
+      }); }
+      var alvo = ev.target.closest('a,button,input,textarea,[tabindex]');
+      ret.classList.toggle('alvo', !!alvo);
+    }, {passive:true});
+    document.addEventListener('mouseleave', function(){ ret.style.opacity='0'; });
+    document.addEventListener('mouseenter', function(){ ret.style.opacity='1'; });
+  }
+})();
+</script>
 
 </body>
 </html>
